@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/rename_item"
+        android:title="Rename"/>
+
+    <item
+        android:id="@+id/delete_item"
+        android:title="Delete"/>
+
+    <item
+        android:id="@+id/show_web_view"
+        android:title="Show in Web View"/>
+</menu>
