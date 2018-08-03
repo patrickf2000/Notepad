@@ -1,11 +1,15 @@
 package android.pdf4664.notepad.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.pdf4664.notepad.utilities.DocUtils;
 import android.pdf4664.notepad.dialogs.FileNameDialog;
 import android.pdf4664.notepad.R;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -19,9 +23,10 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements TextWatcher {
 
     private String currentFile = "untitled";
+    private boolean modified = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,9 @@ public class EditorActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.editor_toolbar);
         toolbar.setTitle(currentFile);
         setSupportActionBar(toolbar);
+
+        EditText editor = (EditText)findViewById(R.id.editor);
+        editor.addTextChangedListener(this);
 
         openFile();
     }
@@ -82,6 +90,8 @@ public class EditorActivity extends AppCompatActivity {
 
             EditText editor = (EditText)findViewById(R.id.editor);
             editor.setText(content);
+
+            modified = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,13 +126,45 @@ public class EditorActivity extends AppCompatActivity {
             writer.write(text);
             writer.flush();
             writer.close();
+
+            modified = false;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void closeFile() {
-        finish();
+        if (modified) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this);
+            builder.setTitle("Confirm Close");
+            builder.setMessage("This file has not been saved!");
+
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    saveFile(false);
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+
+            builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            finish();
+        }
     }
 
     @Override
@@ -137,5 +179,18 @@ public class EditorActivity extends AppCompatActivity {
         title.setTitle(currentFile);
 
         saveFile(false);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        modified = true;
     }
 }
