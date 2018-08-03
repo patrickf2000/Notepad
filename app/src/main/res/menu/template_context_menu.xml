@@ -3,9 +3,9 @@
 
     <item
         android:id="@+id/use_template"
-        android:title="Use template"/>
+        android:title="@string/use_template"/>
 
     <item
         android:id="@+id/delete_template_item"
-        android:title="Delete"/>
+        android:title="@string/delete"/>
 </menu>

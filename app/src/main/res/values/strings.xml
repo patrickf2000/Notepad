@@ -1,8 +1,19 @@
 <resources>
     <string name="app_name">Notepad</string>
-    <string name="welcome_msg">Welcome to Notepad!\nTo get started, choose an action below:</string>
-    <string name="title_activity_chooser">ChooserActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="enter_name_for_file">Enter name for file:</string>
+    <string name="submit">Submit</string>
+    <string name="rename">Rename</string>
+    <string name="delete">Delete</string>
+    <string name="show_in_web_view">Show in Web View</string>
+    <string name="show_templates">Show Templates</string>
+    <string name="about_notepad">About Notepad</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="save_as_template">Save as template</string>
+    <string name="use_template">Use template</string>
+    <string name="no_items">No Items. Start taking some notes!</string>
+    <string name="enter_a_name_for_your_file">Enter a name for your file:</string>
 </resources>

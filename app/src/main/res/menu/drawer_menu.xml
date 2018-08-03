@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/show_templates"
-        android:title="Show Templates"/>
+        android:title="@string/show_templates"/>
 
     <item
         android:id="@+id/about_item"
-        android:title="About Notepad"/>
+        android:title="@string/about_notepad"/>
 
 </menu>

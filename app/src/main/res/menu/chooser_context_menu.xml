@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/rename_item"
-        android:title="Rename"/>
+        android:title="@string/rename"/>
 
     <item
         android:id="@+id/delete_item"
-        android:title="Delete"/>
+        android:title="@string/delete"/>
 
     <item
         android:id="@+id/show_web_view"
-        android:title="Show in Web View"/>
+        android:title="@string/show_in_web_view"/>
 </menu>
