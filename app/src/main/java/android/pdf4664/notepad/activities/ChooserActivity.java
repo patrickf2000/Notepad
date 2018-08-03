@@ -63,7 +63,6 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             public void onClick(View view) {
                 Intent fileNameDialog = new Intent(ChooserActivity.this,FileNameDialog.class);
                 startActivityForResult(fileNameDialog,NEW_FILE);
-                create_file();
             }
         });
 
@@ -210,7 +209,7 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             case R.id.new_file_item: {
                 Intent fileNameDialog = new Intent(ChooserActivity.this,FileNameDialog.class);
                 startActivityForResult(fileNameDialog,NEW_FILE);
-                create_file();
+                //create_file();
             } break;
             case android.R.id.home: {
                 drawer.openDrawer(GravityCompat.START);
@@ -278,7 +277,11 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
             return;
         }
 
-        currentFile = data.getExtras().getString("filename");
+        try {
+            currentFile = data.getExtras().getString("filename");
+        } catch (Exception e) {
+            return;
+        }
 
         switch (requestCode) {
             case NEW_FILE: create_file(); break;

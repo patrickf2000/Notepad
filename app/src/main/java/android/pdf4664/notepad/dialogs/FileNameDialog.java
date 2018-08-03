@@ -29,8 +29,8 @@ public class FileNameDialog extends Activity implements OnClickListener {
         EditText entry = (EditText)findViewById(R.id.fileDialogEntry);
         String result = entry.getText().toString();
 
-        if (result==null) {
-            result="";
+        if (result.isEmpty()) {
+            result="NULL";
         }
 
         Intent intent = new Intent();
