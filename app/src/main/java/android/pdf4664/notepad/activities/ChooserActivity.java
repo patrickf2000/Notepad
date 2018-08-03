@@ -206,12 +206,7 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_file_item: {
-                Intent fileNameDialog = new Intent(ChooserActivity.this,FileNameDialog.class);
-                startActivityForResult(fileNameDialog,NEW_FILE);
-                //create_file();
-            } break;
-            case android.R.id.home: {
+           case android.R.id.home: {
                 drawer.openDrawer(GravityCompat.START);
             } break;
         }
