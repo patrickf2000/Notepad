@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.pdf4664.notepad.utilities.DocUtils;
 import android.pdf4664.notepad.dialogs.FileNameDialog;
 import android.pdf4664.notepad.R;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -55,6 +56,16 @@ public class ChooserActivity extends AppCompatActivity implements AdapterView.On
 
         NavigationView drawerArea = (NavigationView)findViewById(R.id.nav_area);
         drawerArea.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton newFileButton = (FloatingActionButton)findViewById(R.id.new_file_button);
+        newFileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent fileNameDialog = new Intent(ChooserActivity.this,FileNameDialog.class);
+                startActivityForResult(fileNameDialog,NEW_FILE);
+                create_file();
+            }
+        });
 
         DocUtils.checkNotesPath(getApplicationContext());
         DocUtils.checkTemplatesPath(getApplicationContext());
