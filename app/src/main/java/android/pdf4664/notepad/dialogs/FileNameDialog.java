@@ -30,7 +30,7 @@ public class FileNameDialog extends Activity implements OnClickListener {
         String result = entry.getText().toString();
 
         if (result.isEmpty()) {
-            result="NULL";
+            finish();
         }
 
         Intent intent = new Intent();
