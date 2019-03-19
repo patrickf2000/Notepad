@@ -134,13 +134,16 @@ public class TemplateActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String file = data.getExtras().getString("filename");
+        try {
+            String file = data.getExtras().getString("filename");
 
-        switch (requestCode) {
-            case USE_TEMPLATE: {
-                copyTemplate(file);
-                finish();
-            } break;
+            switch (requestCode) {
+                case USE_TEMPLATE: {
+                    copyTemplate(file);
+                    finish();
+                } break;
+            }
+        } catch (NullPointerException e) {
         }
     }
 }
