@@ -1,10 +1,10 @@
-package android.pdf4664.notepad.activities;
+package org.pdf4664.notepad.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.pdf4664.notepad.utilities.DocUtils;
-import android.pdf4664.notepad.dialogs.FileNameDialog;
-import android.pdf4664.notepad.R;
+import org.pdf4664.notepad.utilities.DocUtils;
+import org.pdf4664.notepad.dialogs.FileNameDialog;
+import org.pdf4664.notepad.R;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.pdf4664.notepad">
+    package="org.pdf4664.notepad">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.ChooserActivity"
+            android:name="org.pdf4664.notepad.activities.ChooserActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EditorActivity" />
-        <activity android:name=".dialogs.FileNameDialog" />
-        <activity android:name=".activities.WebActivity" />
-        <activity android:name=".activities.TemplateActivity"></activity>
+        <activity android:name="org.pdf4664.notepad.activities.EditorActivity" />
+        <activity android:name="org.pdf4664.notepad.dialogs.FileNameDialog" />
+        <activity android:name="org.pdf4664.notepad.activities.WebActivity" />
+        <activity android:name="org.pdf4664.notepad.activities.TemplateActivity"></activity>
     </application>
 
 </manifest>

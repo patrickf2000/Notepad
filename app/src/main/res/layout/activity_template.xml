@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.TemplateActivity">
+    tools:context="org.pdf4664.notepad.activities.TemplateActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/template_toolbar"

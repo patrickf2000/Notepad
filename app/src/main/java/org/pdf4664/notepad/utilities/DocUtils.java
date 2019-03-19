@@ -1,4 +1,4 @@
-package android.pdf4664.notepad.utilities;
+package org.pdf4664.notepad.utilities;
 
 import android.content.Context;
 

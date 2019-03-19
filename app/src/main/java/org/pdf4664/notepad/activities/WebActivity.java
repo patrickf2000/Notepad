@@ -1,7 +1,7 @@
-package android.pdf4664.notepad.activities;
+package org.pdf4664.notepad.activities;
 
 import android.content.Intent;
-import android.pdf4664.notepad.R;
+import org.pdf4664.notepad.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;

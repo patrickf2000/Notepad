@@ -1,4 +1,4 @@
-package android.pdf4664.notepad;
+package org.pdf4664.notepad;
 
 import org.junit.Test;
 

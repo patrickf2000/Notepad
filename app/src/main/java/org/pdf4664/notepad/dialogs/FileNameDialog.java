@@ -1,9 +1,9 @@
-package android.pdf4664.notepad.dialogs;
+package org.pdf4664.notepad.dialogs;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.pdf4664.notepad.R;
+import org.pdf4664.notepad.R;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
