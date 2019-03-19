@@ -17,10 +17,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 
-public class TemplateActivity extends AppCompatActivity {
+public class TemplateActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private String currentListItem = "";
 
@@ -34,6 +35,9 @@ public class TemplateActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.template_toolbar);
         toolbar.setTitle("Templates");
         setSupportActionBar(toolbar);
+
+        ListView list = (ListView)findViewById(R.id.template_list);
+        list.setOnItemClickListener(this);
 
         loadList();
     }
@@ -116,10 +120,16 @@ public class TemplateActivity extends AppCompatActivity {
         currentListItem = list_item;
 
         switch (item.getItemId()) {
-            case R.id.use_template: useTemplate(); break;
             case R.id.delete_template_item: deleteTemplate(); break;
         }
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        ListView list = (ListView)adapterView;
+        currentListItem = list.getItemAtPosition(i).toString();
+        useTemplate();
     }
 
     @Override
