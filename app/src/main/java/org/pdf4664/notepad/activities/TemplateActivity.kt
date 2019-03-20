@@ -20,6 +20,7 @@ import android.widget.ListView
 import android.widget.Toast
 
 import java.io.File
+import java.lang.IllegalArgumentException
 
 class TemplateActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -119,9 +120,9 @@ class TemplateActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         useTemplate()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
-            val file = data.extras!!.getString("filename")
+            val file = data?.extras?.getString("filename")
 
             when (requestCode) {
                 USE_TEMPLATE -> {
@@ -129,8 +130,7 @@ class TemplateActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                     finish()
                 }
             }
-        } catch (e: NullPointerException) {
+        } catch (e: Exception) {
         }
-
     }
 }

@@ -1,6 +1,5 @@
 package org.pdf4664.notepad.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import org.pdf4664.notepad.utilities.DocUtils
@@ -10,14 +9,12 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.ContextMenu
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -247,13 +244,13 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         startActivity(editor)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != 0) {
             return
         }
 
         try {
-            currentFile = data.extras!!.getString("filename")
+            currentFile = data?.extras?.getString("filename")
         } catch (e: Exception) {
             return
         }

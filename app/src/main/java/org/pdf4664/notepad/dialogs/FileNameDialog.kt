@@ -27,7 +27,7 @@ class FileNameDialog : Activity(), OnClickListener {
         val entry = findViewById<View>(R.id.fileDialogEntry) as EditText
         val result = entry.text.toString()
 
-        if (result.isEmpty()) {
+        if (result.isEmpty() || result == null) {
             finish()
         }
 
