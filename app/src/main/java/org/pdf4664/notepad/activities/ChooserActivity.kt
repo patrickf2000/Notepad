@@ -266,7 +266,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         val path = DocUtils.notesPath(applicationContext) + selected!!
         val f = File(path)
         if (f.isDirectory) {
-            DocUtils.prefix = selected
+            DocUtils.prefix += selected + File.separator
             loadList()
             return
         }

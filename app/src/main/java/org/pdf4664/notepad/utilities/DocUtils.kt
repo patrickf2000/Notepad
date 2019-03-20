@@ -1,6 +1,7 @@
 package org.pdf4664.notepad.utilities
 
 import android.content.Context
+import android.util.Log
 
 import java.io.File
 
@@ -35,7 +36,7 @@ object DocUtils {
         var path = c.filesDir.absolutePath
         path += File.separator
         path += "notes" + File.separator
-        path += prefix + File.separator
+        path += prefix
         return path
     }
 
