@@ -32,13 +32,13 @@ import java.io.OutputStreamWriter
 
 class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    internal lateinit var fileContents: Array<String?>
-    internal var currentFile: String? = ""
-    internal var currentListItem = ""
-    internal lateinit var drawer: DrawerLayout
+    private lateinit var fileContents: Array<String?>
+    private var currentFile: String? = ""
+    private var currentListItem = ""
+    private lateinit var drawer: DrawerLayout
 
-    internal val NEW_FILE = 1
-    internal val RENAME_FILE = 2
+    private val NEW_FILE = 1
+    private val RENAME_FILE = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +89,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         return ret
     }
 
-    private fun rename_file() {
+    private fun renameFile() {
         val path = DocUtils.notesPath(applicationContext) + currentListItem
         val file = File(path)
 
@@ -99,7 +99,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         loadList()
     }
 
-    private fun delete_file() {
+    private fun deleteFile() {
         val alertDialog = AlertDialog.Builder(this@ChooserActivity)
         alertDialog.setTitle("Confirm Delete")
         alertDialog.setMessage("Are you sure you wish to delete this note?")
@@ -122,7 +122,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         dialog.show()
     }
 
-    private fun create_file() {
+    private fun createFile() {
         try {
             val file = DocUtils.notesPath(applicationContext) + currentFile!!
 
@@ -138,7 +138,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         loadList()
     }
 
-    private fun show_web_view(file_name: String) {
+    private fun showWebView(file_name: String) {
         var text = "<h1>Hello!</h1><h2>Test!</h2>"
 
         try {
@@ -197,8 +197,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        val list_item = getListItem(info.id)
-        currentListItem = list_item
+        val listItem = getListItem(info.id)
+        currentListItem = listItem
 
         when (item.itemId) {
             R.id.rename_item -> {
@@ -206,10 +206,10 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
                 startActivityForResult(fileDialog, RENAME_FILE)
             }
             R.id.delete_item -> {
-                delete_file()
+                deleteFile()
             }
             R.id.show_web_view -> {
-                show_web_view(list_item)
+                showWebView(listItem)
             }
         }
         return true
@@ -222,11 +222,11 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
                 startActivity(intent)
             }
             R.id.about_item -> {
-                val about_text = "Notepad\n" +
+                val aboutText = "Notepad\n" +
                         "Version 1.0\n\n" +
                         "Notepad is licensed under the BSD license."
 
-                val toast = Toast.makeText(applicationContext, about_text, Toast.LENGTH_LONG)
+                val toast = Toast.makeText(applicationContext, aboutText, Toast.LENGTH_LONG)
                 toast.show()
             }
         }
@@ -256,8 +256,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         }
 
         when (requestCode) {
-            NEW_FILE -> create_file()
-            RENAME_FILE -> rename_file()
+            NEW_FILE -> createFile()
+            RENAME_FILE -> renameFile()
         }
     }
 

@@ -14,7 +14,7 @@ object FileUtils {
         writeToFile(file2, templateContent)
     }
 
-    fun fileContent(file: File): String {
+    private fun fileContent(file: File): String {
         var ret = ""
 
         var fileInputStream: FileInputStream? = null
@@ -38,7 +38,7 @@ object FileUtils {
         return ret
     }
 
-    fun writeToFile(file: File, content: String) {
+    private fun writeToFile(file: File, content: String) {
         try {
             val outputStream = FileOutputStream(file)
             val writer = OutputStreamWriter(outputStream)
