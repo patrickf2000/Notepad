@@ -38,7 +38,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
     private lateinit var drawer: DrawerLayout
 
     private val NEW_FILE = 1
-    private val RENAME_FILE = 2
+    private val NEW_FOLDER = 2
+    private val RENAME_FILE = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,6 +139,19 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         loadList()
     }
 
+    private fun createFolder() {
+        try {
+            val file = DocUtils.notesPath(applicationContext) + currentFile!!
+
+            val f = File(file)
+            f.mkdir()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        loadList()
+    }
+
     private fun showWebView(file_name: String) {
         var text = "<h1>Hello!</h1><h2>Test!</h2>"
 
@@ -179,20 +193,25 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         return true
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View,
-                                     menuInfo: ContextMenu.ContextMenuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        val inflater = menuInflater
-        inflater.inflate(R.menu.chooser_context_menu, menu)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 drawer.openDrawer(GravityCompat.START)
             }
+
+            R.id.new_folder -> {
+                val fileDialog = Intent(this, FileNameDialog::class.java)
+                startActivityForResult(fileDialog, NEW_FOLDER)
+            }
         }
         return true
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View,
+                                     menuInfo: ContextMenu.ContextMenuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.chooser_context_menu, menu)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -239,6 +258,13 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
         val selected = fileContents[i]
 
+        val path = DocUtils.notesPath(applicationContext) + selected!!
+        val f = File(path)
+        if (f.isDirectory) {
+            Toast.makeText(this, "Folder!!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val editor = Intent(this@ChooserActivity, EditorActivity::class.java)
         editor.putExtra("file", selected)
         startActivity(editor)
@@ -257,6 +283,7 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
 
         when (requestCode) {
             NEW_FILE -> createFile()
+            NEW_FOLDER -> createFolder()
             RENAME_FILE -> renameFile()
         }
     }
