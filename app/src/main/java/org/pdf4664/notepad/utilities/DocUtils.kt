@@ -37,11 +37,21 @@ object DocUtils {
         path += File.separator
         path += "notes" + File.separator
         path += prefix
+        Log.i("PATH_INFO",path)
         return path
     }
 
     fun navUp() {
-        prefix = "";
+        prefix = prefix.dropLast(1)
+
+        if (!prefix.contains("/")) {
+            prefix = ""
+            return
+        }
+
+        val last = prefix.lastIndexOf("/")
+        prefix = prefix.substring(0,last)
+        prefix += File.separator
     }
 
     fun checkNotesPath(c: Context) {
