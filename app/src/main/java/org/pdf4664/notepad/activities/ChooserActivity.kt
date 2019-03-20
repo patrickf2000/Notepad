@@ -261,7 +261,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         val path = DocUtils.notesPath(applicationContext) + selected!!
         val f = File(path)
         if (f.isDirectory) {
-            Toast.makeText(this, "Folder!!", Toast.LENGTH_SHORT).show()
+            DocUtils.prefix = selected
+            loadList()
             return
         }
 

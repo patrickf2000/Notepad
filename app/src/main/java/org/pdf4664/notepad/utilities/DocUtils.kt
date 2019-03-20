@@ -6,6 +6,8 @@ import java.io.File
 
 object DocUtils {
 
+    var prefix : String = ""
+
     private fun dirContents(c: Context, loadTemplates: Boolean): Array<String?> {
         val file: File
 
@@ -33,6 +35,7 @@ object DocUtils {
         var path = c.filesDir.absolutePath
         path += File.separator
         path += "notes" + File.separator
+        path += prefix + File.separator
         return path
     }
 
