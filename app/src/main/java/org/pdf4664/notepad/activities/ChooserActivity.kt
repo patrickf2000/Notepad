@@ -203,6 +203,11 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
                 val fileDialog = Intent(this, FileNameDialog::class.java)
                 startActivityForResult(fileDialog, NEW_FOLDER)
             }
+
+            R.id.nav_up -> {
+                DocUtils.navUp()
+                loadList()
+            }
         }
         return true
     }

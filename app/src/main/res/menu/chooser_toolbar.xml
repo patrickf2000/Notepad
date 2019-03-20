@@ -7,4 +7,10 @@
         android:title="New Folder"
         app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/nav_up"
+        android:title="Up"
+        app:showAsAction="ifRoom"
+        />
 </menu>

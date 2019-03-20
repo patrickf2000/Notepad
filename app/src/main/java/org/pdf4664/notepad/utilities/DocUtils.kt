@@ -39,6 +39,10 @@ object DocUtils {
         return path
     }
 
+    fun navUp() {
+        prefix = "";
+    }
+
     fun checkNotesPath(c: Context) {
         val f = File(notesPath(c.applicationContext))
         if (!f.exists()) {
