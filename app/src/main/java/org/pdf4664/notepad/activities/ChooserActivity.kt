@@ -68,7 +68,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         fileContents = DocUtils.notesFileContents(applicationContext)
 
         val fileList = findViewById<View>(R.id.file_list) as ListView
-        val contents = ArrayAdapter(this, android.R.layout.simple_list_item_1, fileContents)
+        //val contents = ArrayAdapter(this, android.R.layout.simple_list_item_1, fileContents)
+        val contents = FileListAdapter(this,fileContents)
         fileList.adapter = contents
         fileList.onItemClickListener = this
         registerForContextMenu(fileList)
