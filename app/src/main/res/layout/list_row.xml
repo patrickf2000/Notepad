@@ -28,8 +28,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/thumbnail_layout"
         android:textColor="#000"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 
 </RelativeLayout>
