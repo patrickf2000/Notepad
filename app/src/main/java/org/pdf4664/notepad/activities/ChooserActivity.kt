@@ -30,12 +30,14 @@ import java.io.FileOutputStream
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
+        AdapterView.OnItemLongClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var fileContents: Array<String?>
     private var currentFile: String? = ""
     private var currentListItem = ""
     private lateinit var drawer: DrawerLayout
+    private lateinit var fileList : ListView
 
     private val NEW_FILE = 1
     private val NEW_FOLDER = 2
@@ -67,7 +69,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
     private fun loadList() {
         fileContents = DocUtils.notesFileContents(applicationContext)
 
-        val fileList = findViewById<View>(R.id.file_list) as ListView
+        fileList = findViewById<View>(R.id.file_list) as ListView
+        fileList.setOnItemLongClickListener(this)
         //val contents = ArrayAdapter(this, android.R.layout.simple_list_item_1, fileContents)
         val contents = FileListAdapter(this,fileContents)
         fileList.adapter = contents
@@ -215,6 +218,12 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View,
                                      menuInfo: ContextMenu.ContextMenuInfo) {
+        var path = DocUtils.notesPath(applicationContext) + currentFile
+        if (File(path).isDirectory) {
+            return
+        }
+
+
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater = menuInflater
         inflater.inflate(R.menu.chooser_context_menu, menu)
@@ -275,6 +284,13 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener, Na
         val editor = Intent(this@ChooserActivity, EditorActivity::class.java)
         editor.putExtra("file", selected)
         startActivity(editor)
+    }
+
+    override fun onItemLongClick(adapterView: AdapterView<*>?, p1: View?, pos: Int, p3: Long): Boolean {
+        val p : Int = adapterView?.getItemAtPosition(pos) as Int
+        currentFile = fileContents[p]
+        fileList.showContextMenu()
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -7,4 +7,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--The style controls for the toolbar-->
+    <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:actionBarStyle">@style/Toolbar.ActionBar</item>
+        <item name="android:actionMenuTextColor">#ffffff</item>
+    </style>
+
+    <style name="Toolbar.ActionBar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@style/Toolbar.ActionBar.Text</item>
+    </style>
+
+    <style name="Toolbar.ActionBar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>
