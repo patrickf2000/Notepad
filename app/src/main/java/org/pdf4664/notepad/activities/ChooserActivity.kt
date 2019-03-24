@@ -13,10 +13,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.ContextMenu
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -31,7 +28,8 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
 class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
-        AdapterView.OnItemLongClickListener, NavigationView.OnNavigationItemSelectedListener {
+        AdapterView.OnItemLongClickListener, NavigationView.OnNavigationItemSelectedListener,
+        View.OnTouchListener {
 
     private lateinit var fileContents: Array<String?>
     private var currentFile: String? = ""
@@ -42,6 +40,9 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     private val NEW_FILE = 1
     private val NEW_FOLDER = 2
     private val RENAME_FILE = 3
+
+    private var lastX : Float = 0f
+    private var lastY : Float = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +71,8 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
         fileContents = DocUtils.notesFileContents(applicationContext)
 
         fileList = findViewById<View>(R.id.file_list) as ListView
-        fileList.setOnItemLongClickListener(this)
+        fileList.onItemLongClickListener = this
+        fileList.setOnTouchListener(this)
         //val contents = ArrayAdapter(this, android.R.layout.simple_list_item_1, fileContents)
         val contents = FileListAdapter(this,fileContents)
         fileList.adapter = contents
@@ -223,7 +225,6 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
             return
         }
 
-
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater = menuInflater
         inflater.inflate(R.menu.chooser_context_menu, menu)
@@ -231,8 +232,11 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        val listItem = getListItem(info.id)
-        currentListItem = listItem
+        val index : Int = fileList.getItemAtPosition(info.position) as Int
+        currentListItem = fileContents[index].toString()
+
+
+        Toast.makeText(this,currentListItem,Toast.LENGTH_SHORT).show()
 
         when (item.itemId) {
             R.id.rename_item -> {
@@ -243,9 +247,10 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
                 deleteFile()
             }
             R.id.show_web_view -> {
-                showWebView(listItem)
+                showWebView(currentListItem)
             }
         }
+
         return true
     }
 
@@ -289,8 +294,17 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     override fun onItemLongClick(adapterView: AdapterView<*>?, p1: View?, pos: Int, p3: Long): Boolean {
         val p : Int = adapterView?.getItemAtPosition(pos) as Int
         currentFile = fileContents[p]
-        fileList.showContextMenu()
+        fileList.showContextMenu(lastX, lastY)
         return true
+    }
+
+    override fun onTouch(p0: View?, event: MotionEvent?): Boolean {
+        if (event!!.actionMasked == MotionEvent.ACTION_DOWN) {
+            lastX = event.x
+            lastY = event.y
+        }
+
+        return false
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
