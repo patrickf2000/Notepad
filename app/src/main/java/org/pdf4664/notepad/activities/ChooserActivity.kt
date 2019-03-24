@@ -235,9 +235,6 @@ class ChooserActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
         val index : Int = fileList.getItemAtPosition(info.position) as Int
         currentListItem = fileContents[index].toString()
 
-
-        Toast.makeText(this,currentListItem,Toast.LENGTH_SHORT).show()
-
         when (item.itemId) {
             R.id.rename_item -> {
                 val fileDialog = Intent(this@ChooserActivity, FileNameDialog::class.java)
